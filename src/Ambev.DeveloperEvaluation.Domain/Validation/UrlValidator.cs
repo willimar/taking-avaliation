@@ -26,7 +26,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
             if (string.IsNullOrWhiteSpace(url))
                 return false;
 
-            var regex = new Regex(@"^(https?://)(www\.)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(/.*)?$");
+            var regex = new Regex(@"^https:\/\/(localhost:\d+|www\.[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}).+(png|jpg)$");
 
             return regex.IsMatch(url);
         }
