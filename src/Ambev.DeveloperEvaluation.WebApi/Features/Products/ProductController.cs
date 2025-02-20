@@ -5,6 +5,8 @@ using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.CreateProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.DeleteProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Products.GetProduct;
+using AutoMapper;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
@@ -16,6 +18,20 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Products
     [Route("api/[controller]")]
     public class ProductController : BaseController
     {
+        private readonly IMediator _mediator;
+        private readonly IMapper _mapper;
+
+        /// <summary>
+        /// Initializes a new instance of ProductController
+        /// </summary>
+        /// <param name="mediator"></param>
+        /// <param name="mapper"></param>
+        public ProductController(IMediator mediator, IMapper mapper)
+        {
+            _mediator = mediator;
+            _mapper = mapper;
+        }
+
         /// <summary>
         /// Creates a new product
         /// </summary>
