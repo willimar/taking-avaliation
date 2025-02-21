@@ -8,12 +8,13 @@ public class SaleProductConfiguration : IEntityTypeConfiguration<SaleProduct>
 {
     public void Configure(EntityTypeBuilder<SaleProduct> builder)
     {
-        builder.ToTable("Products");
+        builder.ToTable("SalesProducts");
 
         builder.HasKey(u => u.Id);
         builder.Property(u => u.Id).HasColumnType("uuid").HasDefaultValueSql("gen_random_uuid()");
 
         builder.HasIndex(u => u.SaleId);
+        builder.HasIndex(u => u.ProductId);
 
         builder.Property(u => u.ProductName).IsRequired().HasMaxLength(100);
 
@@ -23,5 +24,7 @@ public class SaleProductConfiguration : IEntityTypeConfiguration<SaleProduct>
         builder.Property(u => u.Count).IsRequired();
 
         builder.Property(u => u.Canceled).IsRequired().HasDefaultValue(false);
+
+        builder.HasOne(u => u.Product).WithMany().HasForeignKey(u => u.ProductId);
     }
 }
