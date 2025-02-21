@@ -18,7 +18,9 @@ public class CreateSaleProfile : Profile
         /// Na prática talvez usasse um identity baseado em cache ou algo do tipo.
         /// Exemplo: ddMMyyyy<valor++>, onde valor seria um singleton que olha a um cache compartilhado.
         CreateMap<CreateSaleCommand, Sale>()
-            .ForMember(dest => dest.Number, source => DateTime.UtcNow.ToString("ddMMyyyyHHmmssfff"));
+            .ForMember(dest => dest.Number, source => source.MapFrom(x => DateTime.UtcNow.ToString("ddMMyyyyHHmmssfff")))
+            .ForMember(dest => dest.Date, source => source.MapFrom(x => DateTime.UtcNow))
+            ;
 
         CreateMap<Sale, CreateSaleResult>();
     }

@@ -13,7 +13,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// <summary>
         /// Gets or sets the Sale Number.
         /// </summary>
-        public int Number { get; set; }
+        public string Number { get; set; } = string.Empty;
 
         /// <summary>
         /// Gets or sets the Sale Date.

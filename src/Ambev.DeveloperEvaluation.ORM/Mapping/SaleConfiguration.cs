@@ -18,8 +18,8 @@ namespace Ambev.DeveloperEvaluation.ORM.Mapping
             builder.HasKey(u => u.Id);
             builder.Property(u => u.Id).HasColumnType("uuid").HasDefaultValueSql("gen_random_uuid()");
 
-            builder.Property(u => u.Number).IsRequired();
-            builder.Property(u => u.Date).IsRequired().HasDefaultValueSql("current_timestamp");
+            builder.Property(u => u.Number).IsRequired().HasMaxLength(20);
+            builder.Property(u => u.Date).IsRequired();
             builder.Property(u => u.CustomerName).IsRequired().HasMaxLength(100);
             builder.Property(u => u.CpfCnpjCustomer).IsRequired().HasMaxLength(20);
             builder.Property(u => u.CompanyName).IsRequired().HasMaxLength(100);
