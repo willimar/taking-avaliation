@@ -8,8 +8,21 @@ using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Domain.Validation
 {
+    /// <summary>
+    /// Validator for Sale that defines validation rules for sale creation.
+    /// </summary>
     public class SaleValidator : AbstractValidator<Sale>
     {
+        /// <summary>
+        /// Initializes a new instance of the CreateSaleCommandValidator with defined validation rules.
+        /// </summary>
+        /// <remarks>
+        /// Validation rules include:
+        /// CustomerName is required and must be between 3 and 100 characters.
+        /// CpfCnpjCustomer is required and must be a valid CPF or CNPJ.
+        /// CompanyName is required and must be between 1 and 100 characters.
+        /// UserName is required and must be between 1 and 50 characters.
+        /// </remarks>
         public SaleValidator()
         {
             RuleFor(sale => sale.CustomerName).NotEmpty().Length(3, 100);

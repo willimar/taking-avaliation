@@ -10,8 +10,15 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 public class CreateSaleRequestValidator : AbstractValidator<CreateSaleRequest>
 {
     /// <summary>
-    /// Initializes validation rules for CreateSaleRequest
+    /// Initializes a new instance of the CreateSaleCommandValidator with defined validation rules.
     /// </summary>
+    /// <remarks>
+    /// Validation rules include:
+    /// CustomerName is required and must be between 3 and 100 characters.
+    /// CpfCnpjCustomer is required and must be a valid CPF or CNPJ.
+    /// CompanyName is required and must be between 1 and 100 characters.
+    /// UserName is required and must be between 1 and 50 characters.
+    /// </remarks>
     public CreateSaleRequestValidator()
     {
         RuleFor(sale => sale.CustomerName).NotEmpty().Length(3, 100);

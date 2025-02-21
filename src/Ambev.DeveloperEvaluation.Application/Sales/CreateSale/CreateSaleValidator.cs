@@ -5,7 +5,7 @@ using FluentValidation;
 namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 
 /// <summary>
-/// Validator for CreateSaleCommand that defines validation rules for Sale creation command.
+/// Validator for CreateSaleCommand that defines validation rules for sale creation.
 /// </summary>
 public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
 {
@@ -14,12 +14,10 @@ public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
     /// </summary>
     /// <remarks>
     /// Validation rules include:
-    /// - Email: Must be in valid format (using EmailValidator)
-    /// - Salename: Required, must be between 3 and 50 characters
-    /// - Password: Must meet security requirements (using PasswordValidator)
-    /// - Phone: Must match international format (+X XXXXXXXXXX)
-    /// - Status: Cannot be set to Unknown
-    /// - Role: Cannot be set to None
+    /// CustomerName is required and must be between 3 and 100 characters.
+    /// CpfCnpjCustomer is required and must be a valid CPF or CNPJ.
+    /// CompanyName is required and must be between 1 and 100 characters.
+    /// UserName is required and must be between 1 and 50 characters.
     /// </remarks>
     public CreateSaleCommandValidator()
     {
