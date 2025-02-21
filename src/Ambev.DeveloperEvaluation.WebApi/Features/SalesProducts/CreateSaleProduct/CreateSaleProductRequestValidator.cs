@@ -23,6 +23,6 @@ public class CreateSaleProductRequestValidator : AbstractValidator<CreateSalePro
         RuleFor(sale => sale.SaleId).Must(id => id != Guid.Empty);
         RuleFor(sale => sale.ProductId).Must(id => id != Guid.Empty);
 
-        RuleFor(sale => sale.Count).GreaterThan(0);
+        RuleFor(sale => sale.Count).GreaterThan(0).LessThanOrEqualTo(20);
     }
 }

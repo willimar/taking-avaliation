@@ -23,14 +23,14 @@ public class SaleProductRepository : ISaleProductRepository
     /// <summary>
     /// Creates a new SaleProduct in the database
     /// </summary>
-    /// <param name="SaleProduct">The SaleProduct to create</param>
+    /// <param name="saleProduct">The SaleProduct to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created SaleProduct</returns>
-    public async Task<SaleProduct> CreateAsync(SaleProduct SaleProduct, CancellationToken cancellationToken = default)
+    public async Task<SaleProduct> CreateAsync(SaleProduct saleProduct, CancellationToken cancellationToken = default)
     {
-        await _context.SalesProducts.AddAsync(SaleProduct, cancellationToken);
+        await _context.SalesProducts.AddAsync(saleProduct, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
-        return SaleProduct;
+        return saleProduct;
     }
 
     /// <summary>
@@ -50,14 +50,33 @@ public class SaleProductRepository : ISaleProductRepository
     /// <param name="id">The unique identifier of the SaleProduct to delete</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>True if the SaleProduct was deleted, false if not found</returns>
-    public async Task<bool> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
+    public async Task<SaleProduct?> DeleteAsync(Guid id, CancellationToken cancellationToken = default)
     {
-        var SaleProduct = await GetByIdAsync(id, cancellationToken);
-        if (SaleProduct == null)
-            return false;
+        var saleProduct = await GetByIdAsync(id, cancellationToken);
+        if (saleProduct == null)
+            return null;
 
-        _context.SalesProducts.Remove(SaleProduct);
+        saleProduct.Canceled = true;
+
+        return await UpdateAsync(saleProduct, cancellationToken);
+    }
+
+    public async Task<decimal> GetTotalBySaleIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        var result = await _context.SalesProducts.Where(x => x.SaleId == id && !x.Canceled).SumAsync(x => x.TotalUnityValue * x.Count);
+
+        return result;
+    }
+
+    public async Task<SaleProduct> UpdateAsync(SaleProduct saleProduct, CancellationToken cancellationToken = default)
+    {
+        _context.SalesProducts.Update(saleProduct);
         await _context.SaveChangesAsync(cancellationToken);
-        return true;
+        return saleProduct;
+    }
+
+    public async Task<SaleProduct?> GetByIdAsync(Guid productId, Guid saleId, CancellationToken cancellationToken = default)
+    {
+        return await _context.SalesProducts.FirstOrDefaultAsync(o => o.SaleId == saleId && o.ProductId == productId, cancellationToken);
     }
 }

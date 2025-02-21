@@ -1,10 +1,7 @@
-﻿using MediatR;
+﻿using Ambev.DeveloperEvaluation.Domain.Enums;
+using Ambev.DeveloperEvaluation.Domain.Repositories;
+using MediatR;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Ambev.DeveloperEvaluation.Application.SaleProducts.CreateSaleProduct
 {
@@ -14,14 +11,18 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.CreateSaleProduct
     public class CreateSaleProductEvent : INotificationHandler<CreateSaleProductNotification>
     {
         private readonly ILogger _logger;
+        private readonly ISaleProductRepository _saleProductRepository;
+        private readonly ISaleRepository _saleRepository;
 
         /// <summary>
         /// Initializes a new instance of CreateSaleProductEvent.
         /// </summary>
         /// <param name="logger"></param>
-        public CreateSaleProductEvent(ILogger<CreateSaleProductEvent> logger)
+        public CreateSaleProductEvent(ILogger<CreateSaleProductEvent> logger, ISaleProductRepository saleProductRepository, ISaleRepository saleRepository)
         {
             _logger = logger;
+            _saleProductRepository = saleProductRepository;
+            _saleRepository = saleRepository;
         }
 
         /// <summary>
@@ -32,8 +33,26 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.CreateSaleProduct
         /// <returns></returns>
         public async Task Handle(CreateSaleProductNotification notification, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("SaleProduct created: {SaleProduct}", notification.SaleProduct);
-            await Task.CompletedTask;
+            if (notification.SaleProduct is null)
+            {
+                _logger.LogError("Product Sale not found");
+                return;
+            }
+
+            // Normalmente este tipo de processamento seria executado de forma assincrona, mas para simplificar o exemplo, foi mantido de forma sincrona.
+            var totalValue = await _saleProductRepository.GetTotalBySaleIdAsync(notification.SaleProduct!.SaleId, cancellationToken);
+            var sale = await _saleRepository.GetByIdAsync(notification.SaleProduct.SaleId, cancellationToken);
+
+            if (sale == null)
+            {
+                _logger.LogError("Sale not found");
+                return;
+            }
+
+            sale.TotalValue = totalValue;
+            sale.Status = SaleStatus.Modified;
+
+            await _saleRepository.UpdateAsync(sale, cancellationToken);
         }
     }
 }

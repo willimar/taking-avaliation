@@ -1,6 +1,7 @@
 using MediatR;
 using FluentValidation;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
+using Ambev.DeveloperEvaluation.Application.SaleProducts.CreateSaleProduct;
 
 namespace Ambev.DeveloperEvaluation.Application.SaleProducts.DeleteSaleProduct;
 
@@ -10,16 +11,17 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.DeleteSaleProduct;
 public class DeleteSaleProductHandler : IRequestHandler<DeleteSaleProductCommand, DeleteSaleProductResponse>
 {
     private readonly ISaleProductRepository _saleProductRepository;
+    private readonly IMediator _mediator;
 
     /// <summary>
     /// Initializes a new instance of DeletesaleProductHandler
     /// </summary>
     /// <param name="saleProductRepository">The saleProduct repository</param>
     /// <param name="validator">The validator for DeletesaleProductCommand</param>
-    public DeleteSaleProductHandler(
-        ISaleProductRepository saleProductRepository)
+    public DeleteSaleProductHandler(ISaleProductRepository saleProductRepository, IMediator mediator)
     {
         _saleProductRepository = saleProductRepository;
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -36,8 +38,11 @@ public class DeleteSaleProductHandler : IRequestHandler<DeleteSaleProductCommand
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var success = await _saleProductRepository.DeleteAsync(request.Id, cancellationToken);
-        if (!success)
+        var removedSaleProduct = await _saleProductRepository.DeleteAsync(request.Id, cancellationToken);
+
+        await _mediator.Publish(new CreateSaleProductNotification { SaleProduct = removedSaleProduct }, cancellationToken);
+
+        if (removedSaleProduct is null)
             throw new KeyNotFoundException($"saleProduct with ID {request.Id} not found");
 
         return new DeleteSaleProductResponse { Success = true };

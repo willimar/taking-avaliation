@@ -23,14 +23,14 @@ public class SaleRepository : ISaleRepository
     /// <summary>
     /// Creates a new Sale in the database
     /// </summary>
-    /// <param name="Sale">The Sale to create</param>
+    /// <param name="sale">The Sale to create</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The created Sale</returns>
-    public async Task<Sale> CreateAsync(Sale Sale, CancellationToken cancellationToken = default)
+    public async Task<Sale> CreateAsync(Sale sale, CancellationToken cancellationToken = default)
     {
-        await _context.Sales.AddAsync(Sale, cancellationToken);
+        await _context.Sales.AddAsync(sale, cancellationToken);
         await _context.SaveChangesAsync(cancellationToken);
-        return Sale;
+        return sale;
     }
 
     /// <summary>
@@ -59,5 +59,12 @@ public class SaleRepository : ISaleRepository
         _context.Sales.Remove(Sale);
         await _context.SaveChangesAsync(cancellationToken);
         return true;
+    }
+
+    public async Task<Sale> UpdateAsync(Sale sale, CancellationToken cancellationToken = default)
+    {
+        _context.Sales.Update(sale);
+        await _context.SaveChangesAsync(cancellationToken);
+        return sale;
     }
 }
