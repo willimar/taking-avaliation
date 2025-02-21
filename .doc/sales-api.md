@@ -16,7 +16,7 @@
         "id": "integer",
         "number": "integer",
         "date": "date",
-        "nomeCliente": "string",
+        "customerName": "string",
         "cpfCnpjCliente": "string",
         "totalValue": "number",
 		"companyName": "string",
