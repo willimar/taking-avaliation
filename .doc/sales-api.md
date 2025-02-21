@@ -13,22 +13,22 @@
   {
     "data": [
       {
-        "id": "integer",
-        "number": "integer",
-        "date": "date",
-        "nomeCliente": "string",
-        "cpfCnpjCliente": "string",
-        "totalValue": "number",
-		"companyName": "string",
-		"userName": "string",
-		"status": "integer"
-        "products": [{
-          "name": "string",
-          "count": "integer",
-		  "unityValue": "number",
-		  "discount": "number",
-		  "totalUnityValue": "number"
-		  "canceled": "boolean"
+	"id": "integer",
+	"number": "integer",
+	"date": "date",
+	"customerName": "string",
+	"cpfCnpjCustomer": "string",
+	"totalValue": "number",
+	"companyName": "string",
+	"userName": "string",
+	"status": "integer"
+	"products": [{
+		"name": "string",
+        	"count": "integer",
+		"unityValue": "number",
+		"discount": "number",
+		"totalUnityValue": "number"
+		"canceled": "boolean"
         }]
       }
     ],
@@ -43,17 +43,10 @@
 - Request Body:
   ```json
   {
-    "nomeCliente": "string",
-	"cpfCnpjCliente": "string",
-	"totalValue": "number",
+	"customerName": "string",
+	"cpfCnpjCustomer": "string",
 	"companyName": "string",
 	"userName": "string",
-	"products": [{
-	  "name": "string",
-	  "count": "integer",
-	  "unityValue": "number",
-	  "canceled": "boolean"
-	}]
   }
   ```
 - Response: 
@@ -62,19 +55,19 @@
 	"id": "integer",
 	"number": "integer",
 	"date": "date",
-	"nomeCliente": "string",
-	"cpfCnpjCliente": "string",
+	"customerName": "string",
+	"cpfCnpjCustomer": "string",
 	"totalValue": "number",
 	"companyName": "string",
 	"userName": "string",
 	"status": "integer"
 	"products": [{
-	  "name": "string",
-	  "count": "integer",
-	  "unityValue": "number",
-	  "discount": "number",
-	  "totalUnityValue": "number"
-	  "canceled": "boolean"
+		"name": "string",
+		"count": "integer",
+		"unityValue": "number",
+		"discount": "number",
+		"totalUnityValue": "number"
+		"canceled": "boolean"
 	}]
   }
   ```
@@ -89,19 +82,19 @@
 	"id": "integer",
 	"number": "integer",
 	"date": "date",
-	"nomeCliente": "string",
-	"cpfCnpjCliente": "string",
+	"customerName": "string",
+	"cpfCnpjCustomer": "string",
 	"totalValue": "number",
 	"companyName": "string",
 	"userName": "string",
 	"status": "integer"
 	"products": [{
-	  "name": "string",
-	  "count": "integer",
-	  "unityValue": "number",
-	  "discount": "number",
-	  "totalUnityValue": "number"
-	  "canceled": "boolean"
+		"name": "string",
+		"count": "integer",
+		"unityValue": "number",
+		"discount": "number",
+		"totalUnityValue": "number"
+		"canceled": "boolean"
 	}]
   }
   ```
