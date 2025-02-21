@@ -45,7 +45,6 @@
   {
 	"customerName": "string",
 	"cpfCnpjCustomer": "string",
-	"totalValue": "number",
 	"companyName": "string",
 	"userName": "string",
 	"products": [{
