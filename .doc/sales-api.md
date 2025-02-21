@@ -47,12 +47,6 @@
 	"cpfCnpjCustomer": "string",
 	"companyName": "string",
 	"userName": "string",
-	"products": [{
-		"name": "string",
-		"count": "integer",
-		"unityValue": "number",
-		"canceled": "boolean"
-	}]
   }
   ```
 - Response: 
