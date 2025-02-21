@@ -19,16 +19,16 @@
         "customerName": "string",
         "cpfCnpjCustomer": "string",
         "totalValue": "number",
-		"companyName": "string",
-		"userName": "string",
-		"status": "integer"
+	"companyName": "string",
+	"userName": "string",
+	"status": "integer"
         "products": [{
-          "name": "string",
-          "count": "integer",
-		  "unityValue": "number",
-		  "discount": "number",
-		  "totalUnityValue": "number"
-		  "canceled": "boolean"
+	        "name": "string",
+        	"count": "integer",
+		"unityValue": "number",
+		"discount": "number",
+		"totalUnityValue": "number"
+		"canceled": "boolean"
         }]
       }
     ],
