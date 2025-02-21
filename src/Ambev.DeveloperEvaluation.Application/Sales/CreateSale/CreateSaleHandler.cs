@@ -50,7 +50,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
         var createdSale = await _SaleRepository.CreateAsync(sale, cancellationToken);
         var result = _mapper.Map<CreateSaleResult>(createdSale);
 
-        await _mediator.Send(new CreateSaleNotification { Sale = createdSale }, cancellationToken);
+        await _mediator.Publish(new CreateSaleNotification { Sale = createdSale }, cancellationToken);
 
         return result;
     }
