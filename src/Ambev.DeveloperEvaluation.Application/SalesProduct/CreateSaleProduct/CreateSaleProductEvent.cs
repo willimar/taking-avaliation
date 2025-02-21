@@ -13,15 +13,15 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.CreateSaleProduct
     /// </summary>
     public class CreateSaleProductEvent : INotificationHandler<CreateSaleProductNotification>
     {
-        private readonly ILogger _logger;
+        //private readonly ILogger _logger;
 
         /// <summary>
         /// Initializes a new instance of CreateSaleProductEvent.
         /// </summary>
         /// <param name="logger"></param>
-        public CreateSaleProductEvent(ILogger logger)
+        public CreateSaleProductEvent(/*ILogger logger*/)
         {
-            _logger = logger;
+            //_logger = logger;
         }
 
         /// <summary>
@@ -32,7 +32,7 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.CreateSaleProduct
         /// <returns></returns>
         public async Task Handle(CreateSaleProductNotification notification, CancellationToken cancellationToken)
         {
-            _logger.LogInformation("SaleProduct created: {SaleProduct}", notification.SaleProduct);
+            //_logger.LogInformation("SaleProduct created: {SaleProduct}", notification.SaleProduct);
             await Task.CompletedTask;
         }
     }
