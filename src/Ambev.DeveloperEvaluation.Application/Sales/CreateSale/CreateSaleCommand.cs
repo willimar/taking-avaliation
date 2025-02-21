@@ -21,30 +21,29 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 public class CreateSaleCommand : IRequest<CreateSaleResult>
 {
     /// <summary>
-    /// Gets or sets the Title of the Sale to be created.
+    /// Gets or sets the Customer Name.
     /// </summary>
-    public string Title { get; set; } = string.Empty;
+    public string CustomerName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the Price of the Sale to be created.
+    /// Gets or sets the Customer CPF/CNPJ.
     /// </summary>
-    public decimal Price { get; set; }
+    public string CpfCnpjCustomer { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the Description of the Sale to be created.
+    /// Gets or sets the Company Name.
     /// </summary>
-    public string Description { get; set; } = string.Empty;
+    public string CompanyName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the Category of the Sale to be created.
+    /// Gets or sets the User Name.
     /// </summary>
-    public string Category { get; set; } = string.Empty;
+    public string UserName { get; set; } = string.Empty;
 
     /// <summary>
-    /// Gets or sets the Image of the Sale to be created.
+    /// Validates the data provided in the command.
     /// </summary>
-    public string Image { get; set; } = string.Empty;
-
+    /// <returns></returns>
     public ValidationResultDetail Validate()
     {
         var validator = new CreateSaleCommandValidator();

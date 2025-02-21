@@ -13,7 +13,13 @@ public class CreateSaleProfile : Profile
     /// </summary>
     public CreateSaleProfile()
     {
-        CreateMap<CreateSaleCommand, Sale>();
+        /// Entendo que não é a forma mais segura de se gerar o número único,
+        /// mas estou montando somente um código para demonstração. 
+        /// Na prática talvez usasse um identity baseado em cache ou algo do tipo.
+        /// Exemplo: ddMMyyyy<valor++>, onde valor seria um singleton que olha a um cache compartilhado.
+        CreateMap<CreateSaleCommand, Sale>()
+            .ForMember(dest => dest.Number, source => DateTime.UtcNow.ToString("ddMMyyyyHHmmssfff"));
+
         CreateMap<Sale, CreateSaleResult>();
     }
 }

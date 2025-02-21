@@ -23,10 +23,9 @@ public class CreateSaleCommandValidator : AbstractValidator<CreateSaleCommand>
     /// </remarks>
     public CreateSaleCommandValidator()
     {
-        RuleFor(sale => sale.Title).NotEmpty().Length(3, 100);
-        RuleFor(sale => sale.Description).NotEmpty().Length(3, 250);
-        RuleFor(sale => sale.Category).NotEmpty().Length(3, 100);
-        RuleFor(sale => sale.Image).NotEmpty().Length(3, 1000);
-        RuleFor(sale => sale.Price).GreaterThan(0);
+        RuleFor(sale => sale.CustomerName).NotEmpty().Length(3, 100);
+        RuleFor(sale => sale.CpfCnpjCustomer).NotEmpty().SetValidator(new CpfCnpjValidator());
+        RuleFor(sale => sale.CompanyName).NotEmpty().Length(1, 100);
+        RuleFor(sale => sale.UserName).NotEmpty().Length(1, 50);
     }
 }

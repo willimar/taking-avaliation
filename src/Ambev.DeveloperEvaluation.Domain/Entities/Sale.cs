@@ -1,5 +1,7 @@
-﻿using Ambev.DeveloperEvaluation.Domain.Common;
+﻿using Ambev.DeveloperEvaluation.Common.Validation;
+using Ambev.DeveloperEvaluation.Domain.Common;
 using Ambev.DeveloperEvaluation.Domain.Enums;
+using Ambev.DeveloperEvaluation.Domain.Validation;
 
 namespace Ambev.DeveloperEvaluation.Domain.Entities
 {
@@ -52,5 +54,16 @@ namespace Ambev.DeveloperEvaluation.Domain.Entities
         /// Gets or sets the Products of the Sale.
         /// </summary>
         public ICollection<SaleProduct> Products { get; set; } = [];
+
+        public ValidationResultDetail Validate()
+        {
+            var validator = new SaleValidator();
+            var result = validator.Validate(this);
+            return new ValidationResultDetail
+            {
+                IsValid = result.IsValid,
+                Errors = result.Errors.Select(o => (ValidationErrorDetail)o)
+            };
+        }
     }
 }

@@ -15,6 +15,7 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
     private readonly ISaleRepository _SaleRepository;
     private readonly IMapper _mapper;
     private readonly IPasswordHasher _passwordHasher;
+    private readonly IMediator _mediator;
 
     /// <summary>
     /// Initializes a new instance of CreateSaleHandler
@@ -22,11 +23,12 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
     /// <param name="SaleRepository">The Sale repository</param>
     /// <param name="mapper">The AutoMapper instance</param>
     /// <param name="validator">The validator for CreateSaleCommand</param>
-    public CreateSaleHandler(ISaleRepository SaleRepository, IMapper mapper, IPasswordHasher passwordHasher)
+    public CreateSaleHandler(ISaleRepository SaleRepository, IMapper mapper, IPasswordHasher passwordHasher, IMediator mediator)
     {
         _SaleRepository = SaleRepository;
         _mapper = mapper;
         _passwordHasher = passwordHasher;
+        _mediator = mediator;
     }
 
     /// <summary>
@@ -47,6 +49,9 @@ public class CreateSaleHandler : IRequestHandler<CreateSaleCommand, CreateSaleRe
 
         var createdSale = await _SaleRepository.CreateAsync(sale, cancellationToken);
         var result = _mapper.Map<CreateSaleResult>(createdSale);
+
+        await _mediator.Send(new CreateSaleNotification { Sale = createdSale }, cancellationToken);
+
         return result;
     }
 }
