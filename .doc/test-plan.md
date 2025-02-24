@@ -36,6 +36,25 @@ Use the below routine
 
 ## Login in the sistem
 
-Use the below routine
+Using the email and password in the registered before execute the below action.
+
 ![image](https://github.com/user-attachments/assets/87cb7a8f-004d-4694-9435-85b03d1ca495)
+
+In the response get the token attribute and save in someplace. See the image to understand.
+
+![image](https://github.com/user-attachments/assets/d15491a3-af77-4064-9307-04b654cc81d2)
+
+## Before another tests, do
+
+Click in the top button "Authorize" and in the modal post your token.
+
+![image](https://github.com/user-attachments/assets/249591be-09a0-46b4-b342-02060d3b0e12)
+
+![image](https://github.com/user-attachments/assets/5c1c5543-2416-41e6-8927-7dabfb6d13d3)
+
+## Create a product
+
+Put the data in the action below and click in the execute button.
+
+![image](https://github.com/user-attachments/assets/46671dfb-e9c0-49a7-a278-f2294994c172)
 
