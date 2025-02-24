@@ -28,4 +28,14 @@ After creating the database, you can run the application in Visual Studio to sta
 
 ## Create a user
 
-To authenticate I use the JWT that existent feature in the API and to facilitate the test the User CRUD is anonymous method.
+To authenticate I use the JWT that existing feature in the API and to facilitate the test the User CRUD is anonymous method. So create the user in the system.
+
+Use the below routine
+
+![image](https://github.com/user-attachments/assets/706a695a-b8a2-47b1-b6d3-f1f88ddeac9e)
+
+## Login in the sistem
+
+Use the below routine
+![image](https://github.com/user-attachments/assets/87cb7a8f-004d-4694-9435-85b03d1ca495)
+
