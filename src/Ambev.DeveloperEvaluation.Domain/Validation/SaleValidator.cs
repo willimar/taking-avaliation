@@ -25,6 +25,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
         /// </remarks>
         public SaleValidator()
         {
+            RuleFor(sale => sale.Number).NotEmpty();
             RuleFor(sale => sale.CustomerName).NotEmpty().Length(3, 100);
             RuleFor(sale => sale.CpfCnpjCustomer).NotEmpty().SetValidator(new CpfCnpjValidator());
             RuleFor(sale => sale.CompanyName).NotEmpty().Length(1, 100);

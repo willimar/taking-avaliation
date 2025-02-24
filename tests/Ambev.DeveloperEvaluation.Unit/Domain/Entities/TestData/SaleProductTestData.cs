@@ -14,12 +14,6 @@ public static class SaleProductTestData
     /// <summary>
     /// Configures the Faker to generate valid SaleProduct entities.
     /// The generated products will have valid:
-    /// - SaleProductname (using internet productnames)
-    /// - Password (meeting complexity requirements)
-    /// - Email (valid format)
-    /// - Phone (Brazilian format)
-    /// - Status (Active or Suspended)
-    /// - Role (Customer or Admin)
     /// </summary>
     private static readonly Faker<SaleProduct> SaleProductFaker = new Faker<SaleProduct>()
         .RuleFor(u => u.ProductId, f => Guid.NewGuid())
