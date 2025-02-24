@@ -22,7 +22,7 @@ namespace Ambev.DeveloperEvaluation.Domain.Validation
             RuleFor(sale => sale.ProductName).NotEmpty().Length(1, 100);
             RuleFor(sale => sale.UnitValue).GreaterThan(0);
             RuleFor(sale => sale.Discount).GreaterThanOrEqualTo(0);
-            RuleFor(sale => sale.TotalUnityValue).GreaterThan(0);
+            RuleFor(sale => sale.TotalUnityValue).GreaterThan(0).Equal(x => x.UnitValue - x.Discount);
 
             RuleFor(sale => sale.Count).GreaterThan(0).LessThanOrEqualTo(20);
         }
