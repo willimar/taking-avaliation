@@ -84,3 +84,7 @@ This section includes links to the detailed documentation for the different API 
 This section describes the overall structure and organization of the project files and directories. 
 
 See [Project Structure](/.doc/project-structure.md)
+
+## Test plan
+
+See [Test Plan](/.doc/test-plan.md)
