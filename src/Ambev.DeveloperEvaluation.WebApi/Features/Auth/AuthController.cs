@@ -4,6 +4,7 @@ using AutoMapper;
 using Ambev.DeveloperEvaluation.WebApi.Common;
 using Ambev.DeveloperEvaluation.WebApi.Features.Auth.AuthenticateUserFeature;
 using Ambev.DeveloperEvaluation.Application.Auth.AuthenticateUser;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Ambev.DeveloperEvaluation.WebApi.Features.Auth;
 
@@ -28,6 +29,7 @@ public class AuthController : BaseController
         _mapper = mapper;
     }
 
+    [AllowAnonymous]
     /// <summary>
     /// Authenticates a user with their credentials
     /// </summary>
@@ -47,7 +49,7 @@ public class AuthController : BaseController
             return BadRequest(validationResult.Errors);
 
         var command = _mapper.Map<AuthenticateUserCommand>(request);
-        var response = await _mediator.Send(command, cancellationToken);
+        AuthenticateUserResult response = await _mediator.Send(command, cancellationToken);
 
         return Ok(new ApiResponseWithData<AuthenticateUserResponse>
         {
