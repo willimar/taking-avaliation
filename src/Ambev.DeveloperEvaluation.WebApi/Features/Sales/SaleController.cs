@@ -1,7 +1,10 @@
-﻿using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
+﻿using Ambev.DeveloperEvaluation.Application.Products.GetProduct;
+using Ambev.DeveloperEvaluation.Application.SaleProducts.GetSaleProduct;
+using Ambev.DeveloperEvaluation.Application.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.Application.Sales.DeleteSale;
 using Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 using Ambev.DeveloperEvaluation.WebApi.Common;
+using Ambev.DeveloperEvaluation.WebApi.Features.SaleProducts.GetSaleProduct;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.DeleteSale;
 using Ambev.DeveloperEvaluation.WebApi.Features.Sales.GetSale;
@@ -79,14 +82,20 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales
             if (!validationResult.IsValid)
                 return BadRequest(validationResult.Errors);
 
-            var command = _mapper.Map<GetSaleCommand>(request.Id);
-            var response = await _mediator.Send(command, cancellationToken);
+            var saleCommand = _mapper.Map<GetSaleCommand>(request.Id);
+            var saleProductcommand = _mapper.Map<GetSaleProductCommand>(request.Id);
+
+            var saleResult = await _mediator.Send(saleCommand, cancellationToken);
+            var saleProducts = await _mediator.Send(saleProductcommand, cancellationToken);
+
+            var response = _mapper.Map<GetSaleResponse>(saleResult);
+            response.Products = _mapper.Map<IEnumerable<GetSaleProductResponse>>(saleProducts);
 
             return Ok(new ApiResponseWithData<GetSaleResponse>
             {
                 Success = true,
                 Message = "Sale retrieved successfully",
-                Data = _mapper.Map<GetSaleResponse>(response)
+                Data = response,
             });
         }
 

@@ -1,6 +1,7 @@
 ﻿using Ambev.DeveloperEvaluation.Domain.Entities;
 using Ambev.DeveloperEvaluation.Domain.Repositories;
 using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace Ambev.DeveloperEvaluation.ORM.Repositories;
 
@@ -42,6 +43,17 @@ public class SaleProductRepository : ISaleProductRepository
     public async Task<SaleProduct?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
     {
         return await _context.SalesProducts.FirstOrDefaultAsync(o => o.Id == id, cancellationToken);
+    }
+
+    /// <summary>
+    /// Retrieves all SaleProducts by their Sale identifier
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    public async Task<IEnumerable<SaleProduct>?> GetBySaleIdAsync(Guid id, CancellationToken cancellationToken = default)
+    {
+        return await _context.SalesProducts.Where(o => o.SaleId == id).ToListAsync();
     }
 
     /// <summary>

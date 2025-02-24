@@ -8,27 +8,42 @@ namespace Ambev.DeveloperEvaluation.Application.Sales.GetSale;
 public class GetSaleResult
 {
     /// <summary>
-    /// The unique identifier of the sale
+    /// Gets or sets the Sale Number.
     /// </summary>
-    public Guid Id { get; set; }
+    public string Number { get; set; } = string.Empty;
 
     /// <summary>
-    /// The sale's Title
+    /// Gets or sets the Sale Date.
     /// </summary>
-    public string Title { get; set; } = string.Empty;
+    public DateTime Date { get; set; }
 
     /// <summary>
-    /// The sale's Image address
+    /// Gets or sets the Customer Name.
     /// </summary>
-    public string Image { get; set; } = string.Empty;
+    public string CustomerName { get; set; } = string.Empty;
 
     /// <summary>
-    /// The sale's Category
+    /// Gets or sets the Customer CPF/CNPJ.
     /// </summary>
-    public string Category { get; set; } = string.Empty;
+    public string CpfCnpjCustomer { get; set; } = string.Empty;
 
     /// <summary>
-    /// The sale's Price
+    /// Gets or sets the Company Name.
     /// </summary>
-    public double Price { get; set; }
+    public string CompanyName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the User Name.
+    /// </summary>
+    public string UserName { get; set; } = string.Empty;
+
+    /// <summary>
+    /// Gets or sets the Total Value of the Sale.
+    /// </summary>
+    public decimal TotalValue { get; set; }
+
+    /// <summary>
+    /// Gets or sets the Sale Status.
+    /// </summary>
+    public SaleStatus Status { get; set; }
 }

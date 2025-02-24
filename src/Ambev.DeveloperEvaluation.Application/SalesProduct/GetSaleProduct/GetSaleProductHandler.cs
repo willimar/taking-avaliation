@@ -8,7 +8,7 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.GetSaleProduct;
 /// <summary>
 /// Handler for processing GetSaleProductCommand requests
 /// </summary>
-public class GetSaleProductHandler : IRequestHandler<GetSaleProductCommand, GetSaleProductResult>
+public class GetSaleProductHandler : IRequestHandler<GetSaleProductCommand, IEnumerable<GetSaleProductResult>>
 {
     private readonly ISaleProductRepository _saleProductRepository;
     private readonly IMapper _mapper;
@@ -33,7 +33,7 @@ public class GetSaleProductHandler : IRequestHandler<GetSaleProductCommand, GetS
     /// <param name="request">The GetSaleProduct command</param>
     /// <param name="cancellationToken">Cancellation token</param>
     /// <returns>The saleProduct details if found</returns>
-    public async Task<GetSaleProductResult> Handle(GetSaleProductCommand request, CancellationToken cancellationToken)
+    public async Task<IEnumerable<GetSaleProductResult>> Handle(GetSaleProductCommand request, CancellationToken cancellationToken)
     {
         var validator = new GetSaleProductValidator();
         var validationResult = await validator.ValidateAsync(request, cancellationToken);
@@ -41,10 +41,10 @@ public class GetSaleProductHandler : IRequestHandler<GetSaleProductCommand, GetS
         if (!validationResult.IsValid)
             throw new ValidationException(validationResult.Errors);
 
-        var saleProduct = await _saleProductRepository.GetByIdAsync(request.Id, cancellationToken);
+        var saleProduct = await _saleProductRepository.GetBySaleIdAsync(request.Id, cancellationToken);
         if (saleProduct == null)
             throw new KeyNotFoundException($"SaleProduct with ID {request.Id} not found");
 
-        return _mapper.Map<GetSaleProductResult>(saleProduct);
+        return _mapper.Map<IEnumerable<GetSaleProductResult>>(saleProduct);
     }
 }

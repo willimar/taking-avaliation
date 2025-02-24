@@ -5,7 +5,7 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.GetSaleProduct;
 /// <summary>
 /// Command for retrieving a saleProduct by their ID
 /// </summary>
-public record GetSaleProductCommand : IRequest<GetSaleProductResult>
+public record GetSaleProductCommand : IRequest<IEnumerable<GetSaleProductResult>>
 {
     /// <summary>
     /// The unique identifier of the saleProduct to retrieve

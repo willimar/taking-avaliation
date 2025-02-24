@@ -32,6 +32,14 @@ public interface ISaleProductRepository
     Task<SaleProduct?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     /// <summary>
+    /// Retrieves all sales by their sale identifier
+    /// </summary>
+    /// <param name="id"></param>
+    /// <param name="cancellationToken"></param>
+    /// <returns></returns>
+    Task<IEnumerable<SaleProduct>?> GetBySaleIdAsync(Guid id, CancellationToken cancellationToken = default);
+
+    /// <summary>
     /// Retrieves a sale by their sale and product identifier
     /// </summary>
     /// <param name="productId"></param>

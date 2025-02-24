@@ -7,28 +7,35 @@ namespace Ambev.DeveloperEvaluation.Application.SaleProducts.GetSaleProduct;
 /// </summary>
 public class GetSaleProductResult
 {
-    /// <summary>
-    /// The unique identifier of the saleProduct
-    /// </summary>
-    public Guid Id { get; set; }
+    public Guid ProductId { get; set; }
 
     /// <summary>
-    /// The saleProduct's Title
+    /// The Name of the Product
     /// </summary>
-    public string Title { get; set; } = string.Empty;
+    public string ProductName { get; set; } = string.Empty;
 
     /// <summary>
-    /// The saleProduct's Image address
+    /// The Value of the Product in the sale day
     /// </summary>
-    public string Image { get; set; } = string.Empty;
+    public decimal UnitValue { get; set; }
 
     /// <summary>
-    /// The saleProduct's Category
+    /// The discount of the product in the sale day
     /// </summary>
-    public string Category { get; set; } = string.Empty;
+    public decimal Discount { get; set; }
 
     /// <summary>
-    /// The saleProduct's Price
+    /// The total value of the product in the sale day
     /// </summary>
-    public double Price { get; set; }
+    public decimal TotalUnityValue { get; set; }
+
+    /// <summary>
+    /// If the product was canceled in the sale
+    /// </summary>
+    public bool Canceled { get; set; }
+
+    /// <summary>
+    /// The quantity of the product in the sale
+    /// </summary>
+    public int Count { get; set; }
 }

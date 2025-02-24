@@ -7,6 +7,8 @@ namespace Ambev.DeveloperEvaluation.WebApi.Features.Sales.CreateSale;
 /// </summary>
 public class CreateSaleResponse
 {
+    public Guid Id { get; set; }
+
     /// <summary>
     /// Gets or sets the Customer Name.
     /// </summary>
