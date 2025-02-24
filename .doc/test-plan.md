@@ -54,7 +54,20 @@ Click in the top button "Authorize" and in the modal post your token.
 
 ## Create a product
 
-Put the data in the action below and click in the execute button.
+Put the data in the action below and click in the execute button. So, with the response copy data.id value with the Guid and save in someplace too.
 
 ![image](https://github.com/user-attachments/assets/46671dfb-e9c0-49a7-a278-f2294994c172)
 
+## Create a Sale
+
+Put the data in the action below and click in the execute button. So, with the response copy data.id value with the Guid and save in someplace too.
+
+![image](https://github.com/user-attachments/assets/590c22c7-acc1-41f1-8b43-66912587c7be)
+
+## Change sale
+
+I believe that the better use case to add product in the sale is in the segregate method, because this I create one action SaleProduct that make integrate the product in the sale. This method can be change the product item too.
+
+To cancelate product item you can remove the item from sale. Below we have a sample from the use of the action.
+
+![image](https://github.com/user-attachments/assets/8d730741-f55b-4205-ae5a-b085c0514b7c)
