@@ -71,3 +71,9 @@ I believe that the better use case to add product in the sale is in the segregat
 To cancelate product item you can remove the item from sale. Below we have a sample from the use of the action.
 
 ![image](https://github.com/user-attachments/assets/8d730741-f55b-4205-ae5a-b085c0514b7c)
+
+## Get a Sale
+
+Enter with same Sale Id in apropriate in the action and click in the Execute button.
+
+![image](https://github.com/user-attachments/assets/ac66da66-fbae-4711-8060-c3411cdb149c)
